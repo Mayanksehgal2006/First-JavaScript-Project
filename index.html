@@ -1,73 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Rock Paper Scissors</title>
-    </head>
-    <body>
-        <script>
-            function getComputerChoice() {
-                let a=Math.random();
-                if(a<=0.33) {
-                    return("rock");
-                }
-                else if(a>0.33 && a<=0.66) {
-                    return("paper");
-                }
-                else {
-                    return ("scissors");
-                }
-            }
-            function getHumanChoice() {
-                let a=prompt("Choice one from rock/paper/scissors: ");
-                return a;
-            }
-            let humanScore=0;
-            let computerScore=0;
-            function playRound(humanChoice, computerChoice) {
-                if(humanChoice==computerChoice) {
-                    console.log("Its a draw");
-                }
-                else if(humanChoice=="rock" && computerChoice=="paper") {
-                    computerScore++;
-                    console.log("You lose! Paper trapped Rock")
-                }
-                else if(humanChoice=="rock" && computerChoice=="scissors") {
-                    humanScore++;
-                    console.log("You won! Rock damaged Scissors")
-                }
-                else if(humanChoice=="paper" && computerChoice=="rock") {
-                    humanScore++;
-                    console.log("You won! Paper trapped Rock")
-                }
-                else if(humanChoice=="paper" && computerChoice=="scissors") {
-                    computerScore++;
-                    console.log("You lose! Scissors cut Paper")
-                }
-                else if(humanChoice=="scissors" && computerChoice=="rock") {
-                    computerScore++;
-                    console.log("You lose! Rock damaged Scissors")
-                }
-                else if(humanChoice=="scissors" && computerChoice=="paper") {
-                    humanScore++;
-                    console.log("You won! Scissors cut Paper")
+
+<head>
+    <meta charset="UTF-8">
+    <title>Rock Paper Scissors</title>
+</head>
+
+<body>
+    <button id="rock">Rock</button>
+    <button id="paper">Paper</button>
+    <button id="scissors">Scissors</button>
+    <script>
+        let as = 0;
+        const btn = document.querySelectorAll("button");
+        btn.forEach((button) => {
+            function alertfunc() {
+                playRound(button.id, getComputerChoice())
+                as++;
+                if (as == 5) {
+                    console.log(`Your score is ${humanScore}`);
+                    console.log(`Computer score is ${computerScore}`);
+                    if (humanScore > computerScore) {
+                        console.log("You won");
+                    }
+                    else if (humanScore == computerScore) {
+                        console.log("Its a draw");
+                    }
+                    else {
+                        console.log("Computer won");
+                    }
                 }
             }
-            for(let i=0;i<5;i++) {
-                playRound(getHumanChoice().toLowerCase(),getComputerChoice());
+            button.addEventListener("click", alertfunc);
+        });
+        function getComputerChoice() {
+            let a = Math.random();
+            if (a <= 0.33) {
+                return ("rock");
             }
-            console.log(`Your score is ${humanScore}`);
-            console.log(`Computer score is ${computerScore}`);
-            if(humanScore>computerScore) {
-                console.log("You won");
-            }
-            else if(humanScore==computerScore) {
-                console.log("Its a draw");
+            else if (a > 0.33 && a <= 0.66) {
+                return ("paper");
             }
             else {
-                console.log("Computer won");
+                return ("scissors");
             }
-            
-        </script>
-    </body>
+        }
+        let humanScore = 0;
+        let computerScore = 0;
+        function playRound(humanChoice, computerChoice) {
+            if (humanChoice == computerChoice) {
+                console.log("Its a draw");
+            }
+            else if (humanChoice == "rock" && computerChoice == "paper") {
+                computerScore++;
+                console.log("You lose! Paper trapped Rock")
+            }
+            else if (humanChoice == "rock" && computerChoice == "scissors") {
+                humanScore++;
+                console.log("You won! Rock damaged Scissors")
+            }
+            else if (humanChoice == "paper" && computerChoice == "rock") {
+                humanScore++;
+                console.log("You won! Paper trapped Rock")
+            }
+            else if (humanChoice == "paper" && computerChoice == "scissors") {
+                computerScore++;
+                console.log("You lose! Scissors cut Paper")
+            }
+            else if (humanChoice == "scissors" && computerChoice == "rock") {
+                computerScore++;
+                console.log("You lose! Rock damaged Scissors")
+            }
+            else if (humanChoice == "scissors" && computerChoice == "paper") {
+                humanScore++;
+                console.log("You won! Scissors cut Paper")
+            }
+        }
+    </script>
+</body>
+
 </html>
